@@ -1,34 +1,34 @@
 import json
+import time
+directorio = open('datos/directorio.json','r')
+datos = json.load(directorio)
 
+def direct():
 
-def publicaciones():
-    profesores= []
+    exten=[]
+    docente=[]
+    cargos =[]
+    departamentos = []
+    for persona in datos:
+        if not(exten.__contains__(persona['extension'])):
+            exten.append(persona['extension'])
+            docente.append({'nombre':persona['nombres'],'apellidos':persona['apellidos'],'cargo':persona['cargo'],'departamento':persona['departamento']})
+        if not(cargos.__contains__(persona['cargo'])):
+            cargos.append(persona['cargo'])
+        if not(departamentos.__contains__(persona['departamento'])):
+            departamentos.append(persona['departamento'])
+    print(f"el total de cargos en la base de datos es de: {len(cargos)}")
+    print(f"el total de departamentos es de: {len(departamentos)}")
+    time.sleep(3)
+    for i in docente:
+        print("_________________________________________________________")
+        print(f"nombres:  {i['nombre']}")
+        print(" ")
+        print(f"apellidos: {i['apellidos']}")
+        print(" ")
+        print(f"cargo: {i['cargo']}")
+        print(" ")
+        print(f"departamento: {i['departamento']}")
 
-    publicaciones= open('datos/publicacion.json','r')
-    datos = json.load(publicaciones)
-
-    for i in datos:
-        cedula= i['cedula']
-        nombre= i['apellidos']
-        if not(profesores.__contains__(i['cedula'])):
-            
-            profesores.append({'cedula': cedula,'nombre': nombre})
-    newprofesor= []
-    for i in profesores:
-        cedula= i['cedula']
-        
-        publicaciones = 0
-        for k in datos:
-            if cedula == k['cedula']:
-                publicaciones= +1
-        newprofesor.append({'cedula':cedula,'nombre':i['nombre'], 'publicaciones': publicaciones})
-    for i in newprofesor:
-        print(f"el docente {i['nombre']} con C.I: {i['cedula']} tiene: {i['publicaciones']} publicacion()")
-
-
-
-
-
-
-if __name__== "__main__":
-    publicaciones()
+if __name__ == "__main__": 
+    direct()
